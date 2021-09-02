@@ -1,8 +1,6 @@
 ## 페이워크 todolist
 
 ## 소개
-***
-​    -To-Do List App 만들기 (UI)
 
 
 -**기술 스택**: React, Redux, styled-components
