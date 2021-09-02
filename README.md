@@ -2,6 +2,8 @@
 
 ## 배포주소
 
+https://xenodochial-minsky-c1f30b.netlify.app/
+
 ## 소개
 
 -**기술 스택**: React, Redux, styled-components
