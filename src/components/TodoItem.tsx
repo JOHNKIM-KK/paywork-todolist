@@ -4,6 +4,7 @@ import React, {
   useState,
   useEffect,
   useRef,
+  useCallback,
 } from "react";
 import { Todo } from "../store/actions/types";
 import styled from "styled-components";
@@ -49,26 +50,29 @@ function TodoItem({ todo, onToggle, onRemove, onEdit }: TodoItemProps) {
     setIsClick(true);
   };
 
-  const handleClickOutside = (e: MouseEvent) => {
-    if (newInput.current === null) return;
+  const handleClickOutside = useCallback(
+    (e: MouseEvent) => {
+      if (newInput.current === null) return;
 
-    if (
-      isClick &&
-      (!newInput.current || !newInput.current.contains(e.target as Node))
-    ) {
-      setIsClick(false);
-      if (newText) {
-        onEdit(todo.id, newText);
+      if (
+        isClick &&
+        (!newInput.current || !newInput.current.contains(e.target as Node))
+      ) {
+        setIsClick(false);
+        if (newText) {
+          onEdit(todo.id, newText);
+        }
       }
-    }
-  };
+    },
+    [isClick, newText, onEdit, todo.id]
+  );
 
   useEffect(() => {
     window.addEventListener("click", handleClickOutside);
     return () => {
       window.removeEventListener("click", handleClickOutside);
     };
-  }, [isClick, newText]);
+  }, [handleClickOutside]);
 
   return (
     <TodoWrapper>
